@@ -12,6 +12,7 @@ import com.example.gads.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,8 +34,21 @@ private ActivityMainBinding binding;
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
+            //customize here. call our method to increment the value
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+
+              //get our textfield
+                TextView textValue  = findViewById(R.id.my_textview);
+                //fetch the text value
+                String stringValue = textValue.getText().toString();
+                //convert to int to pass to our method
+                int originalValue = Integer.parseInt(stringValue);
+                //call our method with the converted value
+                int newValue = IncrementWorker.doubleValue(originalValue);
+                //convert the doubled value and set to our strin value
+                textValue.setText(Integer.toString(newValue));
+
+                Snackbar.make(view, "Changed value " + originalValue + "to" + newValue, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
